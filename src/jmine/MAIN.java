@@ -13,6 +13,5 @@ public class MAIN {
 
 	public static void main(String[] args ) {
 		new GUI( "JMine" );
-		new SplashScreen( "JMine" );
 	}
 }

@@ -19,7 +19,7 @@ public class WindowClosingAdapter extends WindowAdapter {
 		we.getWindow().dispose();
 
 		if( exitSystem == true ) {
-			System.exit( 0 ); // Im JVideo streichen!
+			System.exit( 0 );
 		}
 	}
 }

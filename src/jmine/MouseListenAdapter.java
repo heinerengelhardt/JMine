@@ -8,7 +8,7 @@ import javax.swing.JButton;
 class MouseListenAdapter extends MouseAdapter {
 	private GUI gui;
 	private boolean[] metaField;
-	public static boolean gameover;
+	public static boolean gameover = false;
 
 	public MouseListenAdapter( GUI _gui ) {
 		gui = _gui;
@@ -20,39 +20,23 @@ class MouseListenAdapter extends MouseAdapter {
 	}
 
 	public void mousePressed( MouseEvent me ) {
-		String choosed = new String();
+		if(me.getButton() == 3 && !gameover && (((JButton) me.getSource()).getText().isBlank()) || ((JButton) me.getSource()).getText() == "O") {
+			int nr = Integer.parseInt( ((JButton) me.getSource()).getActionCommand() );
 
-		if( me.isMetaDown() && gameover == false ) {
-			int nr;
-			choosed = ( ( JButton ) me.getSource() ).getActionCommand();
-			nr = Integer.parseInt( choosed );
-			if( metaField[nr - 1] == false ) {
-				gui.ButtonField[nr - 1].setBackground( Color.blue );
-				gui.ButtonField[nr - 1].setText( "X" );
-				gui.statusField.setText( "Bombs: " + ( --GameField.BoCo ) );
-				metaField[nr - 1] = true;
+			if(gui.ButtonField[nr - 1].getBackground() != Color.GRAY) {
+				if (metaField[nr - 1] == false) {
+					gui.ButtonField[nr - 1].setBackground(Color.CYAN);
+					gui.ButtonField[nr - 1].setText("O");
+					gui.statusField.setText("Bombs: " + (--GameField.BoCo));
+					metaField[nr - 1] = true;
+
+				} else {
+					gui.ButtonField[nr - 1].setBackground(Color.LIGHT_GRAY);
+					gui.ButtonField[nr - 1].setText("");
+					gui.statusField.setText("Bombs: " + (++GameField.BoCo));
+					metaField[nr - 1] = false;
+				}
 			}
-			else {
-				gui.ButtonField[nr - 1].setBackground( Color.lightGray );
-				gui.ButtonField[nr - 1].setText( "" );
-				gui.statusField.setText( "Bombs: " + ( ++GameField.BoCo ) );
-				metaField[nr - 1] = false;
-			}
-		}
-
-		switch( me.getClickCount() ) {
-			case 1:
-
-				//System.out.println("EINZELKLICK");
-				break;
-
-			case 2:
-
-				//System.out.println("DOPPELKLICK");
-				break;
-
-			default:
-				break;
 		}
 	}
 }

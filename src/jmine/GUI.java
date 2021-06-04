@@ -2,7 +2,6 @@ package jmine;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Event;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+
+import static java.awt.event.ActionEvent.CTRL_MASK;
 
 public class GUI extends JFrame implements ActionListener {
 
@@ -71,8 +72,8 @@ public class GUI extends JFrame implements ActionListener {
 
 		// initialize window
 		addWindowListener( new WindowClosingAdapter( true ) );
-		setLocation( 150, 150 );
-		setSize( 200, 240 );
+		setLocation( 350, 350 );
+		setSize( 250, 300 );
 		setResizable( false );
 		setVisible( true );
 	}
@@ -120,14 +121,14 @@ public class GUI extends JFrame implements ActionListener {
 	}
 
 	private void setCtrlAccelerator( JMenuItem mi, char acc ) {
-		KeyStroke ks = KeyStroke.getKeyStroke( acc, Event.CTRL_MASK );
+		KeyStroke ks = KeyStroke.getKeyStroke( acc, CTRL_MASK );
 		mi.setAccelerator( ks );
 	}
 
 	public void actionPerformed( ActionEvent event ) {
-		String choosed = event.getActionCommand();
+		String chosen = event.getActionCommand();
 
-		if( choosed.equals( "New Game" ) ) {
+		if( chosen.equals( "New Game" ) ) {
 			gamefield = new GameField( this );
 			checkclickedbutton = new CheckClickedButton( this );
 			MouseListenAdapter.gameover = false;
@@ -136,12 +137,13 @@ public class GUI extends JFrame implements ActionListener {
 				ButtonField[i - 1].setText( "" );
 				ButtonField[i - 1].setEnabled( true );
 				ButtonField[i - 1].setVisible( true );
-				ButtonField[i - 1].setBackground( Color.lightGray );
+				ButtonField[i - 1].setBackground( Color.LIGHT_GRAY );
+				ButtonField[i - 1].setForeground( Color.BLACK );
 			}
 		}
 		else
 
-		if( choosed.equals( "Exit" ) ) {
+		if( chosen.equals( "Exit" ) ) {
 			if( JOptionPane.showConfirmDialog( null, "Really Quit JMine?",
 											   "Exit",
 											   JOptionPane.YES_NO_OPTION ) == 0 ) {
@@ -152,18 +154,21 @@ public class GUI extends JFrame implements ActionListener {
 		}
 		else
 
-		if( choosed.equals( "JMine Rules" ) ) {
+		if( chosen.equals( "JMine Rules" ) ) {
 			JOptionPane.showMessageDialog( null, "Find all bombs on the field.",
 										   "JMine Rules",
 										   JOptionPane.INFORMATION_MESSAGE );
 		}
 		else
 
-		if( choosed.equals( "About" ) ) {
-			JOptionPane.showMessageDialog( null, "JMine\n" +
-				"by engelhardt (engelhardt@dvoid.org)\n" +
-				"version 0.1\n" +
-				"All Rights Reserved", "About", JOptionPane.INFORMATION_MESSAGE );
+		if( chosen.equals( "About" ) ) {
+			JOptionPane.showMessageDialog( null,
+					"JMine\n" +
+							"by Heiner Engelhardt (heiner.engelhardt@gmail.org)\n" +
+							"version 0.1\n" +
+							"All Rights Reserved",
+					"About",
+					JOptionPane.INFORMATION_MESSAGE );
 		}
 
 		else {
@@ -171,7 +176,7 @@ public class GUI extends JFrame implements ActionListener {
 			int bombCount;
 			buttonNr = Integer.parseInt( event.getActionCommand() ); // thanks to Dominik
 			bombCount = gamefield.CheckForBombs( buttonNr - 1 );
-			checkclickedbutton.checkhim( buttonNr, bombCount );
+			checkclickedbutton.check( buttonNr, bombCount );
 		}
 	}
 }

@@ -13,14 +13,14 @@ public class CheckClickedButton {
 		gui = _gui;
 	}
 
-	public void checkhim( int _buttonNr, int _bombCount ) {
+	public void check(int _buttonNr, int _bombCount ) {
 		bombCount = _bombCount;
 		buttonNr = _buttonNr;
 		if( bombCount == 88 ) {
 			for( int i = 1, nr = 0; i <= 100; i++ ) {
 				nr = GameField.CheckForBombs( i - 1 );
 				if( nr == 88 ) {
-					gui.ButtonField[i - 1].setBackground( Color.red );
+					gui.ButtonField[i - 1].setBackground( Color.RED );
 					gui.ButtonField[i - 1].setText( "X" );
 				}
 				else
@@ -42,7 +42,7 @@ public class CheckClickedButton {
 			for( int i = 1, nr = 0; i <= 100; i++ ) {
 				nr = GameField.CheckForBombs( i - 1 );
 				if( nr == 0 ) {
-					gui.ButtonField[i - 1].setBackground( Color.gray );
+					gui.ButtonField[i - 1].setBackground( Color.GRAY );
 					gui.ButtonField[i - 1].setEnabled( false );
 					gui.ButtonField[i - 1].setText( "" );
 				}
@@ -51,7 +51,7 @@ public class CheckClickedButton {
 
 		else {
 			gui.ButtonField[buttonNr - 1].setText( "" + bombCount );
-			gui.ButtonField[buttonNr - 1].setBackground( Color.gray );
+			gui.ButtonField[buttonNr - 1].setBackground( Color.GRAY );
 		}
 	}
 
