@@ -1,5 +1,5 @@
 # JMine
- Simple Minesweeper clone
+ Simple Minesweeper clone with some bugs ;-)
 
 ## Screenshots
 ![image](https://user-images.githubusercontent.com/45694082/120792004-32229d80-c535-11eb-91c5-36cb14b3ee57.png)
